@@ -1,0 +1,20 @@
+export enum Categories {
+    ARCANES="Arcanes",
+    ARCHWING="Archwing",
+    FISH="Fish",
+    GEAR="Gear",
+    GLYPHS="Glyphs",
+    MELEE="Melee",
+    MISC="Misc",
+    MODS="Mods",
+    PETS="Pets",
+    PRIMARY="Primary",
+    QUESTS="Quests",
+    RELICS="Relics",
+    RESOURCES="Resources",
+    SECONDARY="Secondary",
+    SENTINELS="Sentinels",
+    SIGILS="Sigils",
+    SKINS="Skins",
+    WARFRAMES="Warframes"
+  }
