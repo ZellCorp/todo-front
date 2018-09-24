@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemsService } from '../items.service';
 import { Categories } from './../categories.enum';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-items',
@@ -10,8 +11,6 @@ import { Categories } from './../categories.enum';
 
 export class ItemsComponent implements OnInit {
   constructor(private itemsService: ItemsService) { }
-
-  serverImageUrl: string ="http://localhost:3000/images/";
   items: any[];
   categories: string[] = Object.values(Categories);
   category: Categories= Categories.WARFRAMES;
@@ -22,7 +21,7 @@ export class ItemsComponent implements OnInit {
   }
 
   getItemImage(imageName: string): string {
-    return this.serverImageUrl+imageName;
+    return environment.ressourcesUrl+imageName;
   }
 
   ngOnInit() {

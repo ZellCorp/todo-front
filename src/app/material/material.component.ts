@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-material',
@@ -10,10 +11,9 @@ export class MaterialComponent implements OnInit {
   constructor() { }
 
   @Input() materials: any[];
-  serverImageUrl: string ="http://localhost:3000/images/";
   
   getItemImage(imageName: string): string {
-    return this.serverImageUrl+imageName;
+    return environment.ressourcesUrl+imageName;
   }
   
   ngOnInit() {
