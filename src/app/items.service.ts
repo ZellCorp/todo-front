@@ -15,6 +15,6 @@ export class ItemsService {
   constructor(private http: HttpClient) { }
 
   getItems(category: string): Observable<any[]> {
-    return this.http.get<any[]>(environment.apiUrl+category);
+    return this.http.get<any[]>(environment.apiUrl+"items/"+category);
   }
 }

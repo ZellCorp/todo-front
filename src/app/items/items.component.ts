@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ItemsService } from '../items.service';
 import { Categories } from './../categories.enum';
 import { environment } from './../../environments/environment';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-items',
@@ -10,7 +12,12 @@ import { environment } from './../../environments/environment';
 })
 
 export class ItemsComponent implements OnInit {
-  constructor(private itemsService: ItemsService) { }
+  constructor(
+    private itemsService: ItemsService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
+
   items: any[];
   categories: string[] = Object.values(Categories);
   category: Categories= Categories.WARFRAMES;
@@ -25,6 +32,12 @@ export class ItemsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => 
+      {
+        if(params['id'] != null)
+          this.category = params['id'];
+    });
+    console.log(this.category);
     this.getItems(this.category);
   }
 }

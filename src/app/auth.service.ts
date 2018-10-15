@@ -16,6 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(userId: any): Observable<any> {
+    console.log("authservice login");
     return this.http.post<{token: string}>(environment.apiAuthUrl+"login", userId)
       .pipe(
         map(result => {
@@ -31,6 +32,10 @@ export class AuthService {
   
   public get isLoggedIn(): boolean {
     return localStorage.getItem('access_token') !== null;
+  }
+
+  getToken() {
+    return localStorage.getItem('access_token');
   }
   
 }

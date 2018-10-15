@@ -2,20 +2,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AppComponent } from './app.component';
 import { ItemsComponent } from './items/items.component';
 import { AccountComponent } from './account/account.component';
 import { MaterialComponent } from './material/material.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthGuard } from './auth/auth.guard';
+import { TokenInterceptor } from './auth/token.interceptor';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/items', pathMatch: 'full'},
-  { path: 'login', component: AccountComponent },
-  { path: 'items/:id', component: ItemsComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/items/Warframes', pathMatch: 'full'},
+  { path: 'auth/login', component: AccountComponent },
+  { path: 'items/:id', component: ItemsComponent},
+  { path: 'items', component: ItemsComponent},
 ];
 
 export function tokenGetter() {
@@ -43,7 +45,13 @@ export function tokenGetter() {
     RouterModule.forRoot(routes),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
