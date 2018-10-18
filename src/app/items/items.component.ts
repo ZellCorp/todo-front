@@ -37,7 +37,7 @@ export class ItemsComponent implements OnInit {
         if(params['id'] != null)
           this.category = params['id'];
     });
-    console.log(this.category);
+    
     this.getItems(this.category);
   }
 }

@@ -12,12 +12,13 @@ import { MaterialComponent } from './material/material.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/items/Warframes', pathMatch: 'full'},
-  { path: 'auth/login', component: AccountComponent },
-  { path: 'items/:id', component: ItemsComponent},
-  { path: 'items', component: ItemsComponent},
+  { path: 'auth/login', component: AccountComponent},
+  { path: 'items/:id', component: ItemsComponent, canActivate: [AuthGuard]},
+  { path: 'items', component: ItemsComponent, canActivate: [AuthGuard]},
+  //{ path: '', redirectTo: '/items/Warframes', pathMatch: 'full', canActivate: [AuthGuard]},
 ];
 
 export function tokenGetter() {
