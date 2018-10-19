@@ -14,7 +14,11 @@ export class ItemsService {
 
   constructor(private http: HttpClient) { }
 
-  getItems(category: string): Observable<any[]> {
+  getItemsByCategory(category: string): Observable<any[]> {
     return this.http.get<any[]>(environment.apiUrl+"items/"+category);
+  }
+
+  getItemsByLogin(): Observable<any[]>{
+    return this.http.get<any[]>(environment.apiUrl+"wishlist");
   }
 }

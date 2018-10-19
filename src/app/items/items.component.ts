@@ -3,7 +3,6 @@ import { ItemsService } from '../items.service';
 import { Categories } from './../categories.enum';
 import { environment } from './../../environments/environment';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-items',
@@ -23,7 +22,7 @@ export class ItemsComponent implements OnInit {
   category: Categories= Categories.WARFRAMES;
 
   getItems(category: string): void {
-    this.itemsService.getItems(category)
+    this.itemsService.getItemsByCategory(category)
     .subscribe(items => {this.items = items});
   }
 
@@ -34,10 +33,11 @@ export class ItemsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => 
       {
-        if(params['id'] != null)
+        if(params['id'] != null) {
           this.category = params['id'];
+          this.getItems(this.category);
+        }
     });
     
-    this.getItems(this.category);
   }
 }

@@ -13,12 +13,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { AuthGuard } from './auth/auth.guard';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 const routes: Routes = [
   { path: 'auth/login', component: AccountComponent},
   { path: 'items/:id', component: ItemsComponent, canActivate: [AuthGuard]},
   { path: 'items', component: ItemsComponent, canActivate: [AuthGuard]},
-  //{ path: '', redirectTo: '/items/Warframes', pathMatch: 'full', canActivate: [AuthGuard]},
+  { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard]},
+  { path: '', redirectTo: 'items/Warframes', pathMatch: 'full', canActivate: [AuthGuard]},
 ];
 
 export function tokenGetter() {
@@ -30,7 +32,8 @@ export function tokenGetter() {
     AppComponent,
     ItemsComponent,
     AccountComponent,
-    MaterialComponent
+    MaterialComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ export function tokenGetter() {
         blacklistedRoutes: ['localhost:4000/api/auth']
       }
     }),
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { enableTracing: true }),
     AppRoutingModule
   ],
   providers: [
